@@ -51,17 +51,15 @@ int main(void)
 
     Player player = Player_init(INITIAL_BET);
 
-    printf("Running %d iterations ..........\n", ITERATIONS);
+    printf("Running %d iterations with inital bet of %d\n", ITERATIONS, INITIAL_BET);
     for (int i = 0; i < ITERATIONS; ++i) {
         int win = rand() % 2;
         Player_update(&player, win);
     }
 
-    printf("Current Wallet: %d\n", player.wallet);
-    printf("      Next Bet: %d\n", player.bet);
-    printf("          High: %d\n", player.high);
-    printf("           Low: %d\n", player.low);
-    printf("        Streak: %d\n", player.streak);
+    printf("      Winnings: %d\n", player.wallet);
+    printf("  Session High: %d\n", player.high);
+    printf("   Session Low: %d\n", player.low);
     printf("   Best Streak: %d\n", player.best_streak);
     printf("  Worst Streak: %d\n", player.worst_streak);
 }

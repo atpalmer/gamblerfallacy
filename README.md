@@ -11,45 +11,37 @@ The following sample runs use 1,000,000,000 iterations and a 10-dollar starting 
 
 
 ```
-Running 1000000000 iterations ..........
-Current Wallet: 34340
-      Next Bet: 10
-          High: 354960
-           Low: -20480
-        Streak: -1
+Running 1000000000 iterations with inital bet of 10
+      Winnings: 34340
+  Session High: 354960
+   Session Low: -20480
    Best Streak: 28
   Worst Streak: -27
 ```
 
 ```
-Running 1000000000 iterations ..........
-Current Wallet: 66350
-      Next Bet: 10
-          High: 320820
-           Low: -81920
-        Streak: -1
+Running 1000000000 iterations with inital bet of 10
+      Winnings: 66350
+  Session High: 320820
+   Session Low: -81920
    Best Streak: 28
   Worst Streak: -27
 ```
 
 ```
-Running 1000000000 iterations ..........
-Current Wallet: 300440
-      Next Bet: 10
-          High: 377180
-           Low: -40960
-        Streak: 1
+Running 1000000000 iterations with inital bet of 10
+      Winnings: 300440
+  Session High: 377180
+   Session Low: -40960
    Best Streak: 27
   Worst Streak: -28
 ```
 
 ```
-Running 1000000000 iterations ..........
-Current Wallet: 378490
-      Next Bet: 10
-          High: 573560
-           Low: -163840
-        Streak: -1
+Running 1000000000 iterations with inital bet of 10
+      Winnings: 378490
+  Session High: 573560
+   Session Low: -163840
    Best Streak: 28
   Worst Streak: -28
 ```
