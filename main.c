@@ -9,7 +9,7 @@ static const int INITIAL_BET = 10;
 #define MIN(a, b)   ((a) < (b) ? (a) : (b))
 
 typedef struct {
-    int wallet;
+    int winnings;
     int bet;
     int low;
     int high;
@@ -21,7 +21,7 @@ typedef struct {
 Player Player_init(int bet)
 {
     Player new = {
-        .wallet = 0,
+        .winnings = 0,
         .bet = bet,
         .high = 0,
         .low = 0,
@@ -34,10 +34,10 @@ Player Player_init(int bet)
 
 void Player_update(Player *p, int win)
 {
-    p->wallet += win ? p->bet : -p->bet;
-    p->bet = p->wallet < 0 ? -p->wallet : INITIAL_BET;
-    p->low = MIN(p->wallet, p->low);
-    p->high = MAX(p->wallet, p->high);
+    p->winnings += win ? p->bet : -p->bet;
+    p->bet = p->winnings < 0 ? -p->winnings : INITIAL_BET;
+    p->low = MIN(p->winnings, p->low);
+    p->high = MAX(p->winnings, p->high);
     p->streak = ((p->streak >= 0) == win)
         ? (p->streak + ((p->streak >= 0) - (p->streak < 0)))
         : (win ? 1 : -1);
@@ -57,7 +57,7 @@ int main(void)
         Player_update(&player, win);
     }
 
-    printf("      Winnings: %d\n", player.wallet);
+    printf("      Winnings: %d\n", player.winnings);
     printf("  Session High: %d\n", player.high);
     printf("   Session Low: %d\n", player.low);
     printf("   Best Streak: %d\n", player.best_streak);
