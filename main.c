@@ -8,7 +8,7 @@ static const int INITIAL_BET = 10;
 #define MAX(a, b)   ((a) > (b) ? (a) : (b))
 #define MIN(a, b)   ((a) < (b) ? (a) : (b))
 
-typedef struct {
+struct session {
     int winnings;
     int bet;
     int low;
@@ -16,11 +16,11 @@ typedef struct {
     int streak;
     int best_streak;
     int worst_streak;
-} Player;
+};
 
-Player Player_init(int bet)
+static struct session session_init(int bet)
 {
-    Player new = {
+    struct session new = {
         .winnings = 0,
         .bet = bet,
         .high = 0,
@@ -32,34 +32,34 @@ Player Player_init(int bet)
     return new;
 }
 
-void Player_update(Player *p, int win)
+static void session_update(struct session *s, int win)
 {
-    p->winnings += win ? p->bet : -p->bet;
-    p->bet = p->winnings < 0 ? -p->winnings : INITIAL_BET;
-    p->low = MIN(p->winnings, p->low);
-    p->high = MAX(p->winnings, p->high);
-    p->streak = ((p->streak >= 0) == win)
-        ? (p->streak + ((p->streak >= 0) - (p->streak < 0)))
+    s->winnings += win ? s->bet : -s->bet;
+    s->bet = s->winnings < 0 ? -s->winnings : INITIAL_BET;
+    s->low = MIN(s->winnings, s->low);
+    s->high = MAX(s->winnings, s->high);
+    s->streak = ((s->streak >= 0) == win)
+        ? (s->streak + ((s->streak >= 0) - (s->streak < 0)))
         : (win ? 1 : -1);
-    p->best_streak = MAX(p->streak, p->best_streak);
-    p->worst_streak = MIN(p->streak, p->worst_streak);
+    s->best_streak = MAX(s->streak, s->best_streak);
+    s->worst_streak = MIN(s->streak, s->worst_streak);
 }
 
 int main(void)
 {
     srand(time(NULL));
 
-    Player player = Player_init(INITIAL_BET);
+    struct session s = session_init(INITIAL_BET);
 
     printf("Running %d iterations with inital bet of %d\n", ITERATIONS, INITIAL_BET);
     for (int i = 0; i < ITERATIONS; ++i) {
         int win = rand() % 2;
-        Player_update(&player, win);
+        session_update(&s, win);
     }
 
-    printf("      Winnings: %d\n", player.winnings);
-    printf("  Session High: %d\n", player.high);
-    printf("   Session Low: %d\n", player.low);
-    printf("   Best Streak: %d\n", player.best_streak);
-    printf("  Worst Streak: %d\n", player.worst_streak);
+    printf("      Winnings: %d\n", s.winnings);
+    printf("  Session High: %d\n", s.high);
+    printf("   Session Low: %d\n", s.low);
+    printf("   Best Streak: %d\n", s.best_streak);
+    printf("  Worst Streak: %d\n", s.worst_streak);
 }
